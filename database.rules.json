@@ -1,0 +1,48 @@
+{
+  "rules": {
+    "xime": {
+      ".read": true,
+      ".write": true,
+      ".validate": "newData.val() == null || newData.isObject()",
+      "shift": {
+        "people": { ".validate": "newData.hasChildren() && newData.numChildren() <= 8" },
+        "person": { ".validate": "newData.isString() && newData.val().length <= 20" },
+        "until": { ".validate": "newData.isNumber()" }
+      },
+      "nightShift": {
+        "people": { ".validate": "newData.val() == null || (newData.hasChildren() && newData.numChildren() <= 8)" },
+        "updatedAt": { ".validate": "newData.isNumber()" }
+      },
+      "schedule": {
+        "$date": {
+          "shift": {
+            "people": { ".validate": "newData.hasChildren() && newData.numChildren() <= 8" },
+            "person": { ".validate": "newData.isString() && newData.val().length <= 30" },
+            "until": { ".validate": "newData.isNumber()" },
+            "updatedAt": { ".validate": "newData.isNumber()" }
+          },
+          "shifts": {
+            "$id": {
+              "people": { ".validate": "newData.hasChildren() && newData.numChildren() <= 8" },
+              "person": { ".validate": "newData.isString() && newData.val().length <= 30" },
+              "start": { ".validate": "newData.isNumber()" },
+              "until": { ".validate": "newData.isNumber()" },
+              "car": { ".validate": "newData.isBoolean()" },
+              "updatedAt": { ".validate": "newData.isNumber()" }
+            }
+          },
+          "nightShift": {
+            "people": { ".validate": "newData.val() == null || (newData.hasChildren() && newData.numChildren() <= 8)" },
+            "updatedAt": { ".validate": "newData.isNumber()" }
+          }
+        }
+      },
+      "mood": {
+        "value": { ".validate": "newData.isString() && newData.val().length <= 20" },
+        "note": { ".validate": "newData.isString() && newData.val().length <= 140" }
+      },
+      "medications": { "$id": { "name": { ".validate": "newData.isString() && newData.val().length <= 60" }, "dose": { ".validate": "newData.isString() && newData.val().length <= 80" } } },
+      "comments": { "$id": { "author": { ".validate": "newData.isString() && newData.val().length <= 24" }, "text": { ".validate": "newData.isString() && newData.val().length <= 500" } } }
+    }
+  }
+}
