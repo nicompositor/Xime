@@ -1,0 +1,8 @@
+{
+  "rules": {
+    "xime": {
+      ".read": true,
+      ".write": true
+    }
+  }
+}

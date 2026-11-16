@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f8eee5" />
+    <meta name="description" content="Tablero familiar para acompañar a Xime." />
+    <title>Xime y la familia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+    <header class="hero shell">
+      <div>
+        <p class="eyebrow">UNIDOS, PASO A PASO</p>
+        <h1>Xime <span>y la familia</span></h1>
+        <p class="hero-copy">Un rincón para cuidarnos, organizarnos y estar siempre cerquita.</p>
+      </div>
+      <div class="live-pill" id="connection-pill"><span></span><b>Conectando…</b></div>
+    </header>
+
+    <nav class="day-nav shell" aria-label="Elegir día de los turnos">
+      <button id="previous-day" type="button" aria-label="Día anterior">←</button>
+      <label class="date-picker"><span>VER TURNOS DEL</span><input id="schedule-date" type="date" /></label>
+      <button id="next-day" type="button" aria-label="Día siguiente">→</button>
+      <button class="today-button" id="go-today" type="button">Hoy</button>
+    </nav>
+
+    <main class="shell dashboard">
+      <section class="card shift-card" aria-labelledby="shift-title">
+        <div class="card-heading">
+          <div><p class="section-kicker" id="selected-day-label">ACOMPAÑAMIENTO · HOY</p><h2 id="shift-title">¿Quién está con Xime?</h2></div>
+          <button class="icon-button" id="edit-shift" aria-label="Agregar turno" title="Agregar turno">＋</button>
+        </div>
+        <div class="current-shift">
+          <div class="avatar" id="current-avatar">—</div>
+          <div class="shift-summary"><p class="current-name" id="current-person">Sin turno activo</p><p class="until" id="current-until">Revisa los horarios del día</p><span class="car-badge" id="current-car">🚗 Llega en carro</span></div>
+        </div>
+        <div class="family-grid" id="family-grid"></div>
+        <div class="timeline-block">
+          <div class="timeline-heading"><span>HORARIOS DEL DÍA</span><button id="add-shift" type="button">＋ Nuevo turno</button></div>
+          <div class="shift-list" id="shift-list"><p class="empty-state">Todavía no hay turnos programados.</p></div>
+        </div>
+        <div class="night-panel">
+          <span class="night-icon">☾</span>
+          <div><small>TURNO NOCTURNO</small><strong id="night-people">Sin asignar</strong></div>
+          <button class="night-edit" id="edit-night" type="button" aria-label="Editar turno nocturno">✎</button>
+        </div>
+      </section>
+
+      <section class="card mood-card" aria-labelledby="mood-title">
+        <div class="card-heading">
+          <div><p class="section-kicker">HOY</p><h2 id="mood-title">¿Cómo se siente Xime?</h2></div>
+        </div>
+        <div class="mood-options" id="mood-options" role="radiogroup" aria-label="Estado de ánimo"></div>
+        <label class="field-label" for="mood-note">Una notica sobre cómo se siente</label>
+        <div class="inline-form">
+          <input id="mood-note" maxlength="140" placeholder="Ej. Descansó bien y tiene buen ánimo" />
+          <button class="primary-button" id="save-mood">Guardar</button>
+        </div>
+        <p class="meta" id="mood-meta"></p>
+      </section>
+
+      <section class="card treatment-card" aria-labelledby="treatment-title">
+        <div class="card-heading">
+          <div><p class="section-kicker">CUIDADOS</p><h2 id="treatment-title">Tratamientos</h2></div>
+        </div>
+        <div class="therapy-list">
+          <label class="therapy-row"><span class="therapy-icon">☀</span><span><b>Radioterapia</b><small id="radio-status">Pendiente</small></span><input type="checkbox" id="radio-check" /><i></i></label>
+          <label class="therapy-row"><span class="therapy-icon">✦</span><span><b>Quimioterapia</b><small id="chemo-status">Pendiente</small></span><input type="checkbox" id="chemo-check" /><i></i></label>
+        </div>
+        <p class="meta" id="therapy-meta"></p>
+      </section>
+
+      <section class="card meds-card" aria-labelledby="meds-title">
+        <div class="card-heading">
+          <div><p class="section-kicker">MEDICINAS</p><h2 id="meds-title">Lo que le han dado</h2></div>
+          <button class="add-button" id="add-med">＋ Agregar</button>
+        </div>
+        <div id="med-list" class="entry-list"><p class="empty-state">Todavía no hay medicinas registradas.</p></div>
+      </section>
+
+      <section class="card comments-card" aria-labelledby="comments-title">
+        <div class="card-heading">
+          <div><p class="section-kicker">ENTRE TODOS</p><h2 id="comments-title">Comentarios y novedades</h2></div>
+        </div>
+        <form id="comment-form" class="comment-form">
+          <input id="comment-author" maxlength="24" placeholder="Tu nombre" required />
+          <textarea id="comment-text" maxlength="500" placeholder="Escribe una novedad para la familia…" required></textarea>
+          <button class="primary-button" type="submit">Publicar comentario</button>
+        </form>
+        <div id="comment-list" class="comment-list"><p class="empty-state">Aún no hay comentarios. Deja el primero 💛</p></div>
+      </section>
+    </main>
+
+    <footer class="shell"><p>Hecho con mucho amor para Xime <span>♥</span></p></footer>
+
+    <dialog id="shift-dialog">
+      <form method="dialog" id="shift-form" class="dialog-form">
+        <div class="dialog-heading"><div><p class="section-kicker">HORARIO</p><h2 id="shift-dialog-title">Agregar turno</h2></div><button class="close-button" value="cancel" aria-label="Cerrar">×</button></div>
+        <input id="shift-id" type="hidden" />
+        <fieldset class="people-fieldset"><legend>¿Quiénes están con Xime?</legend><div class="people-picker" id="shift-people"></div><small>Puedes elegir varias personas.</small></fieldset>
+        <label class="other-name" id="shift-other-wrap" hidden>Nombre de la otra persona<input id="shift-other-name" maxlength="30" placeholder="Escribe su nombre" /></label>
+        <div class="time-fields"><label>Hora de llegada<input id="shift-start" type="time" required /></label><label>Hora de salida<input id="shift-until" type="time" required /></label></div>
+        <label class="car-check"><input id="shift-car" type="checkbox" /><span class="car-check-box">✓</span><span><b>🚗 Llega en carro</b><small>Así quien está con Xime puede irse en el carro.</small></span></label>
+        <button class="primary-button wide" id="save-shift" value="default">Guardar turno</button>
+      </form>
+    </dialog>
+
+    <dialog id="night-dialog">
+      <form method="dialog" id="night-form" class="dialog-form">
+        <div class="dialog-heading"><div><p class="section-kicker">ESTA NOCHE</p><h2>¿Quién se queda?</h2></div><button class="close-button" value="cancel" aria-label="Cerrar">×</button></div>
+        <fieldset class="people-fieldset"><legend>Elige una o varias personas</legend><div class="people-picker" id="night-people-picker"></div><small>Este turno se muestra por separado debajo de los nombres.</small></fieldset>
+        <label class="other-name" id="night-other-wrap" hidden>Nombre de la otra persona<input id="night-other-name" maxlength="30" placeholder="Escribe su nombre" /></label>
+        <button class="primary-button wide" id="save-night" value="default">Guardar turno nocturno</button>
+      </form>
+    </dialog>
+
+    <dialog id="med-dialog">
+      <form method="dialog" id="med-form" class="dialog-form">
+        <div class="dialog-heading"><div><p class="section-kicker">NUEVO REGISTRO</p><h2>Agregar medicina</h2></div><button class="close-button" value="cancel" aria-label="Cerrar">×</button></div>
+        <label>Medicina<input id="med-name" maxlength="60" placeholder="Nombre de la medicina" required /></label>
+        <label>Dosis o indicación<input id="med-dose" maxlength="80" placeholder="Ej. 1 tableta · 500 mg" /></label>
+        <label>Hora<input id="med-time" type="datetime-local" required /></label>
+        <button class="primary-button wide" id="save-med" value="default">Guardar medicina</button>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="firebase-config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
